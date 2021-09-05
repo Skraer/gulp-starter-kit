@@ -37,7 +37,7 @@ const args = {
   init: false
 }
 
-if (args.tylesExt === 'scss' || args.stylesExt === 'sass') {
+if (args.stylesExt === 'scss' || args.stylesExt === 'sass') {
   args.stylesType = 'sass'
 }
 
