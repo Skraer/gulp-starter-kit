@@ -2,7 +2,7 @@ const { src, dest } = require('gulp')
 const sass = require('gulp-sass')(require('sass'))
 const less = require('gulp-less')
 const stylus = require('gulp-stylus')
-const { source, output } = require('./paths')
+const { source, output } = require('../paths')
 const rename = require('gulp-rename')
 const plumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
@@ -10,9 +10,10 @@ const autoprefixer = require('gulp-autoprefixer')
 const cleanCSS = require('gulp-clean-css')
 const gulpIf = require('gulp-if')
 const { notifyHandler } = require('./plumbers')
-const args = require('./args')
+const args = require('../args')
 const gcmq = require('gulp-group-css-media-queries')
-const { wrongConfigParam } = require('./utils')
+const { wrongConfigParam } = require('../utils')
+
 
 const filesDir = `${source.styles}/**/*.${args.stylesExt}`
 

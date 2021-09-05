@@ -3,10 +3,10 @@ const path = require('path')
 const { source } = require('./paths')
 
 function createStructure() {
-  const src = source.toString()
+  const srcDir = source.toString()
   // console.log(src)
-  if (!fs.existsSync(path.join(src))) {
-    fs.mkdirSync(path.join(src))
+  if (!fs.existsSync(path.join(srcDir))) {
+    fs.mkdirSync(path.join(srcDir))
   }
   for (let dir in source) {
     if (dir === 'toString') continue

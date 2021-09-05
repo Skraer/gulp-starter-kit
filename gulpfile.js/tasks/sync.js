@@ -1,5 +1,5 @@
 // const browserSync = require('browser-sync')
-const { output } = require('./paths')
+const { output } = require('../paths')
 
 module.exports = function syncInit(browserSyncInstance) {
   return function sync() {

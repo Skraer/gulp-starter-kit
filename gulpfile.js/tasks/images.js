@@ -1,13 +1,20 @@
 const { src, dest } = require('gulp')
-const args = require('./args')
-const { source, output } = require('./paths')
+const args = require('../args')
+const { source, output } = require('../paths')
 const plumber = require('gulp-plumber')
+const rs = require('../utils').reverseSlash
+// const path = require('path')
+const mozjpeg = require('imagemin-mozjpeg')
+const optipng = require('imagemin-optipng')
+const gifsicle = require('imagemin-gifsicle')
+const svgo = require('imagemin-svgo')
 
 const imagemin = require('gulp-imagemin')
 const { notifyHandler } = require('./plumbers')
 
 function images() {
-  return src(`${source.images}/**/*.{${args.imgExts}}`)
+  const dir = `${source.images}/**/*.{${args.imgExts}}`
+  return src(dir)
     .pipe(
       plumber({
         errorHandler: notifyHandler('Images'),
@@ -16,23 +23,23 @@ function images() {
     .pipe(
       imagemin(
         [
-          imagemin.gifsicle({
+          gifsicle({
             interlaced: true,
           }),
-          imagemin.mozjpeg({
+          mozjpeg({
             progressive: true,
             quality: 65,
           }),
-          imagemin.optipng({
+          optipng({
             optimizationLevel: 5,
           }),
-          imagemin.svgo({
+          svgo({
             plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
           }),
         ],
         {
           verbose: args.isProduct,
-        }
+        },
       )
     )
     .pipe(dest(output.images))

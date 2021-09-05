@@ -1,7 +1,0 @@
-{
-  "layout_ext": "html",
-  "styles_ext": "sass",
-  "minimize": ["js"],
-  "ignore_images": "svg",
-  "export_libs": []
-}

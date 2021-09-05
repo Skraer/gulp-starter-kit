@@ -2,7 +2,8 @@ const rawArgs = process.argv.slice(2)
 const { normalArg } = require('./utils')
 require('dotenv').config()
 const { env } = require('process')
-const config = require('../gulp.config.json')
+const path = require('path')
+const config = require(path.join(process.cwd(), 'gulp.config.json'))
 
 const arrFromConfigField = (value) => {
   if (typeof value === 'string') {
@@ -33,6 +34,7 @@ const args = {
   downgrade: false,
   imgExts: imageExtensions,
   exportLibs: arrFromConfigField(config.export_libs),
+  init: false
 }
 
 if (args.tylesExt === 'scss' || args.stylesExt === 'sass') {
@@ -45,6 +47,10 @@ if (rawArgs.includes('-sm')) {
 
 if (rawArgs.includes('-dg')) {
   args.downgrade = true
+}
+
+if (rawArgs.includes('init')) {
+  args.init = true
 }
 
 module.exports = args

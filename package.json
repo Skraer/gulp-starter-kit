@@ -3,16 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": "./bin/index.js",
   "browserslist": [
     "last 10 versions",
     "> 0.1%"
   ],
-  "scripts": {
-    "dev": "gulp dev",
-    "build": "gulp build",
-    "build-sm": "gulp build -sm",
-    "build-dg": "gulp build -dg"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -41,6 +36,10 @@
     "gulp-ttf2woff": "^1.1.1",
     "gulp-ttf2woff2": "^4.0.1",
     "gulp-uglify-es": "^3.0.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^9.0.0",
     "sass": "^1.38.2"
   }
 }

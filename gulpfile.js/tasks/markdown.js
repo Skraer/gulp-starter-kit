@@ -1,10 +1,11 @@
 const { src, dest } = require('gulp')
 const pug = require('gulp-pug')
-const args = require('./args')
-const { source, output } = require('./paths')
+const args = require('../args')
+const { source, output } = require('../paths')
 const preprocess = require('gulp-preprocess')
-const { wrongConfigParam } = require('./utils')
+const { wrongConfigParam } = require('../utils')
 const gulpIf = require('gulp-if')
+
 
 const extensions = ['pug', 'html']
 
@@ -19,6 +20,7 @@ function markdown() {
   if (!extensions.includes(args.layoutExt)) {
     wrongConfigParam('layout_ext')
   }
+  // console.log('path: ', `${source.markdown}/*.${args.layoutExt}`);
   return src(`${source.markdown}/*.${args.layoutExt}`)
     .pipe(
       gulpIf(

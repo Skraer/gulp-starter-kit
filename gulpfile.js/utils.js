@@ -24,3 +24,4 @@ exports.wrongTask = (availableTasks) => {
   )
   throw new Error('Wrong task name')
 }
+exports.reverseSlash = (path) => path.replace(/\\/g, '/')

@@ -1,14 +1,15 @@
 const { src, dest } = require('gulp')
-const { source, output } = require('./paths')
+const { source, output } = require('../paths')
 const rename = require('gulp-rename')
 const plumber = require('gulp-plumber')
 const sourcemaps = require('gulp-sourcemaps')
 const gulpIf = require('gulp-if')
 const { notifyHandler } = require('./plumbers')
-const args = require('./args')
+const args = require('../args')
 // const { wrongEnvParam } = require('./utils')
 const babel = require('gulp-babel')
 const uglify = require('gulp-uglify-es').default
+
 
 const minimizeJs =
   (args.minimize.includes('js') || args.minimize.includes('javascript')) &&
