@@ -20,8 +20,8 @@ function clean() {
 }
 
 // function createStructure(cb) {}
-// const exportLibs = exportHandler(args.exportLibs, output.libs)
-// const exportOther = exportHandler(`${source}/other/**/*.*`, `${output}/other`)
+const exportLibs = exportHandler(args.exportLibs, output.libs)
+const exportOther = exportHandler(`${source}/other/**/*.*`, `${output}/other`)
 
 function defaultTask(cb) {
   wrongTask('dev, build')
@@ -33,7 +33,7 @@ function defaultTask(cb) {
 function watchTask() {
   const layoutExt = args.layoutExt
   const stylesExt = args.stylesExt
-  
+
   watch(rs(`${source.markdown}/*.${layoutExt}`), series(markdown))
   watch(rs(`${source.styles}/**/*.${stylesExt}`), series(styles))
   watch(rs(`${source.js}/**/*.js`), series(javascript))
@@ -42,7 +42,7 @@ function watchTask() {
 
 const build = series(
   clean,
-  parallel(markdown, styles, javascript, images),
+  parallel(markdown, styles, javascript, images, exportLibs, exportOther),
   fontsConvert
 )
 const develop = series(build, parallel(watchTask, sync))

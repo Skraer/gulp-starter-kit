@@ -1,11 +1,12 @@
 const { src, dest } = require('gulp')
 const pug = require('gulp-pug')
+const preprocess = require('gulp-preprocess')
+const gulpIf = require('gulp-if')
+const fileinclude = require('gulp-file-include')
+
 const args = require('../args')
 const { source, output } = require('../paths')
-const preprocess = require('gulp-preprocess')
 const { wrongConfigParam } = require('../utils')
-const gulpIf = require('gulp-if')
-
 
 const extensions = ['pug', 'html']
 
@@ -29,6 +30,13 @@ function markdown() {
           pretty: minimizeHtml,
         })
       )
+    )
+    .pipe(
+      fileinclude({
+        prefix: '@@',
+        basepath: '@file',
+        indent: true,
+      })
     )
     .pipe(preprocess({ context: { STYLE_MIN: renameCss, JS_MIN: renameJs } }))
     .pipe(dest(output.html))

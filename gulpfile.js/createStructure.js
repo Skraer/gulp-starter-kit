@@ -4,7 +4,6 @@ const { source } = require('./paths')
 
 function createStructure() {
   const srcDir = source.toString()
-  // console.log(src)
   if (!fs.existsSync(path.join(srcDir))) {
     fs.mkdirSync(path.join(srcDir))
   }
