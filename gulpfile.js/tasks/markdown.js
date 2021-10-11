@@ -38,7 +38,15 @@ function markdown() {
         indent: true,
       })
     )
-    .pipe(preprocess({ context: { STYLE_MIN: renameCss, JS_MIN: renameJs } }))
+    .pipe(
+      preprocess({
+        context: {
+          STYLE_MIN: renameCss,
+          JS_MIN: renameJs,
+          IS_PRODUCTION: args.isProduct,
+        },
+      })
+    )
     .pipe(dest(output.html))
 }
 
