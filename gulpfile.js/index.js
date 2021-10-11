@@ -34,7 +34,7 @@ function watchTask() {
   const layoutExt = args.layoutExt
   const stylesExt = args.stylesExt
 
-  watch(rs(`${source.markdown}/*.${layoutExt}`), series(markdown))
+  watch(rs(`${source.markdown}/**/*.${layoutExt}`), series(markdown))
   watch(rs(`${source.styles}/**/*.${stylesExt}`), series(styles))
   watch(rs(`${source.js}/**/*.js`), series(javascript))
   watch(rs(`${source.images}/**/*.${args.imgExts}`), series(images))
@@ -42,8 +42,15 @@ function watchTask() {
 
 const build = series(
   clean,
-  parallel(markdown, styles, javascript, images, exportLibs, exportOther),
-  fontsConvert
+  parallel(
+    fontsConvert,
+    markdown,
+    styles,
+    javascript,
+    images,
+    exportLibs,
+    exportOther
+  )
 )
 const develop = series(build, parallel(watchTask, sync))
 

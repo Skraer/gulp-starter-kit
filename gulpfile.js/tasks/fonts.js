@@ -7,7 +7,6 @@ const ttf2woff = require('gulp-ttf2woff')
 const ttf2woff2 = require('gulp-ttf2woff2')
 const gulpIf = require('gulp-if')
 
-
 function fontsHandler(plugin, ext) {
   return function fonts() {
     return src(`${source.fonts}/**/*.*`)
@@ -16,7 +15,7 @@ function fontsHandler(plugin, ext) {
           errorHandler: notifyHandler(`Fonts: ${ext}`),
         })
       )
-      .pipe(gulpIf(args.isProduct, plugin()))
+      .pipe(plugin())
       .pipe(dest(output.fonts))
   }
 }
