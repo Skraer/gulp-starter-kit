@@ -3,7 +3,13 @@ const { normalArg } = require('./utils')
 require('dotenv').config()
 const { env } = require('process')
 const path = require('path')
-const config = require(path.join(process.cwd(), 'gulp.config.json'))
+
+let config;
+try {
+  config = require(path.join(process.cwd(), 'gulp.config.json'))
+} catch (e) {
+  config = require('./defaultConfig')
+}
 
 const arrFromConfigField = (value) => {
   if (typeof value === 'string') {
