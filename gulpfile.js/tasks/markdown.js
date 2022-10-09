@@ -10,12 +10,9 @@ const { wrongConfigParam } = require('../utils')
 
 const extensions = ['pug', 'html']
 
-const minimizeHtml = !args.minimize.includes('html')
+const minimizeHtml = args.minimize.includes('html')
 const renameCss = (args.isProduct && args.minimize.includes('css')) || undefined
-const renameJs =
-  (args.isProduct &&
-    (args.minimize.includes('js') || args.minimize.includes('javascript'))) ||
-  undefined
+const renameJs = (args.isProduct && args.minimize.includes('js')) || undefined
 
 function markdown() {
   if (!extensions.includes(args.layoutExt)) {

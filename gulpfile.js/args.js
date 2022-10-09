@@ -1,23 +1,19 @@
 const rawArgs = process.argv.slice(2)
-const { normalArg } = require('./utils')
+const { normalArg, arrFromField } = require('./utils')
 require('dotenv').config()
 const { env } = require('process')
 const path = require('path')
-const config = require(path.join(process.cwd(), 'gulp.config.json'))
 
-const arrFromConfigField = (value) => {
-  if (typeof value === 'string') {
-    return [value]
-  } else if (value instanceof Array) {
-    return value.map((item) => normalArg(item))
-  } else {
-    return []
-  }
+let config;
+try {
+  config = require(path.join(process.cwd(), 'gulp.config.json'))
+} catch (e) {
+  config = require('./defaultConfig')
 }
 
 process.env.NODE_ENV = rawArgs.includes('build') ? 'production' : 'development'
 
-const ignoreImages = arrFromConfigField(config.ignore_images)
+const ignoreImages = arrFromField(config.ignore_images)
 const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg']
   .filter((ext) => !ignoreImages.includes(ext))
   .join(',')
@@ -27,19 +23,19 @@ const args = {
   sourceMaps: false,
   layoutExt: normalArg(config.layout_ext) || 'html',
   stylesExt: normalArg(config.styles_ext) || 'css',
-  stylesType: 'css',
+  // stylesType: 'css',
   isDevelop: env.NODE_ENV === 'development',
   isProduct: env.NODE_ENV === 'production',
-  minimize: arrFromConfigField(config.minimize),
+  minimize: arrFromField(config.minimize).map(str => str === 'javascript' ? 'js' : str),
   downgrade: false,
   imgExts: imageExtensions,
-  exportLibs: arrFromConfigField(config.export_libs),
+  // exportLibs: arrFromField(config.export_libs),
   init: false
 }
 
-if (args.stylesExt === 'scss' || args.stylesExt === 'sass') {
-  args.stylesType = 'sass'
-}
+// if (args.stylesExt === 'scss' || args.stylesExt === 'sass') {
+//   args.stylesType = 'sass'
+// }
 
 if (rawArgs.includes('-sm')) {
   args.sourceMaps = true

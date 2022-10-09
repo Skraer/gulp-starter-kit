@@ -11,9 +11,7 @@ const babel = require('gulp-babel')
 const uglify = require('gulp-uglify-es').default
 
 
-const minimizeJs =
-  (args.minimize.includes('js') || args.minimize.includes('javascript')) &&
-  args.isProduct
+const minimizeJs = args.isProduct && args.minimize.includes('js')
 
 function javascript() {
   return src(`${source.js}/**/*.js`)
@@ -25,7 +23,7 @@ function javascript() {
     .pipe(gulpIf(args.sourceMaps && minimizeJs, sourcemaps.init()))
     .pipe(
       gulpIf(
-        args.downgrade && args.isProduct,
+        args.isProduct && args.downgrade,
         babel({
           presets: ['@babel/env'],
         })

@@ -14,42 +14,53 @@ const args = require('../args')
 const gcmq = require('gulp-group-css-media-queries')
 const { wrongConfigParam } = require('../utils')
 
-
 const filesDir = `${source.styles}/**/*.${args.stylesExt}`
 
 const compressCss = args.minimize.includes('css')
 
-const styleHandlers = {
+const handlers = {
   sass() {
     return sass({
       outputStyle: 'expanded',
       errLogToConsole: true,
     }).on('error', sass.logError)
   },
+  get scss() {
+    return this.sass
+  },
   less() {
     return less()
   },
   stylus() {
     return stylus()
-  },
+  }
 }
 
 function stylesInit(browserSyncInstance) {
   return function styles() {
     let willCompress = args.isProduct && compressCss
-    const styleHandler = styleHandlers[args.stylesType](willCompress)
-    if (!styleHandler) {
+
+    if (!args.stylesExt) {
       wrongConfigParam('styles_ext')
     }
 
-    return src(filesDir)
+    const styleHandler = args.stylesExt === 'css'
+      ? null
+      : handlers[args.stylesExt]
+
+    let stream = src(filesDir)
       .pipe(
         plumber({
           errorHandler: notifyHandler('Styles'),
         })
       )
       .pipe(gulpIf(args.sourceMaps && willCompress, sourcemaps.init()))
-      .pipe(styleHandler)
+
+    if (styleHandler !== null) {
+      stream = stream.pipe(styleHandler())
+    }
+
+    stream
       .pipe(
         gulpIf(
           args.isProduct,

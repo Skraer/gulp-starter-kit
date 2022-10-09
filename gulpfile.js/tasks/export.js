@@ -1,7 +1,7 @@
 const { src, dest } = require('gulp')
 const { notifyHandler } = require('./plumbers')
 const plumber = require('gulp-plumber')
-
+const { source, output } = require('../paths')
 
 function exportHandler(from, to) {
   return function exportFiles() {
@@ -15,4 +15,7 @@ function exportHandler(from, to) {
   }
 }
 
-module.exports = exportHandler
+exports.exportLibs = exportHandler(`${source.libs}/**/*.*`, `${output.libs}`)
+exports.exportOther = exportHandler(`${source.other}/**/*.*`, `${output.other}`)
+
+// module.exports = exportHandler
