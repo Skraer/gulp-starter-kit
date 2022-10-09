@@ -1,22 +1,24 @@
 exports.normalArg = (param) => param?.toLowerCase().trim() || null
+
 exports.wrongConfigParam = (param) => {
   console.log(
     '\x1b[33m',
-    'Вероятно, неверно указан параметр',
+    'Wrong config parameter',
     '\x1b[0m',
     '\x1b[45m',
     `${param}`,
     '\x1b[0m',
     '\x1b[33m',
-    'в файле gulp.config.json',
+    'in file gulp.config.json',
     '\x1b[0m'
   )
   throw new Error('Custom parameter error')
 }
+
 exports.wrongTask = (availableTasks) => {
   console.log(
     '\x1b[41m',
-    'Укажите один из представленных тасков:',
+    'Expected one of these tasks:',
     '\x1b[0m',
     '\x1b[45m',
     `${availableTasks}`,
@@ -24,4 +26,15 @@ exports.wrongTask = (availableTasks) => {
   )
   throw new Error('Wrong task name')
 }
+
 exports.reverseSlash = (path) => path.replace(/\\/g, '/')
+
+exports.arrFromField = (value) => {
+  if (typeof value === 'string') {
+    return [value]
+  } else if (value instanceof Array) {
+    return value.map((item) => normalArg(item))
+  } else {
+    return []
+  }
+}

@@ -14,6 +14,7 @@ const source = {
   js: path.join(srcDir, 'js'),
   libs: path.join(srcDir, 'libs'),
   fonts: path.join(srcDir, 'fonts'),
+  other: path.join(srcDir, 'other')
 }
 
 const output = {
@@ -26,6 +27,7 @@ const output = {
   js: path.join(outputDir, 'js'),
   libs: path.join(outputDir, 'libs'),
   fonts: path.join(outputDir, 'fonts'),
+  other: path.join(outputDir, 'other')
 }
 
 exports.source = source
