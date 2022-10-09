@@ -48,14 +48,19 @@ function stylesInit(browserSyncInstance) {
       ? null
       : handlers[args.stylesExt]
 
-    return src(filesDir)
+    let stream = src(filesDir)
       .pipe(
         plumber({
           errorHandler: notifyHandler('Styles'),
         })
       )
       .pipe(gulpIf(args.sourceMaps && willCompress, sourcemaps.init()))
-      .pipe(gulpIf(styleHandler !== null, styleHandler()))
+
+    if (styleHandler !== null) {
+      stream = stream.pipe(styleHandler())
+    }
+
+    stream
       .pipe(
         gulpIf(
           args.isProduct,
