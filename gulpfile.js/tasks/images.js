@@ -38,7 +38,7 @@ function images() {
           }),
         ],
         {
-          verbose: args.isProduct,
+          verbose: args.isProduct || args.isDebug,
         },
       )
     )

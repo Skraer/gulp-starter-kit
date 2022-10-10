@@ -11,14 +11,14 @@ const { wrongConfigParam } = require('../utils')
 const extensions = ['pug', 'html']
 
 const minimizeHtml = args.minimize.includes('html')
-const renameCss = (args.isProduct && args.minimize.includes('css')) || undefined
-const renameJs = (args.isProduct && args.minimize.includes('js')) || undefined
+const renameCss = !!(args.isProduct && args.minimize.includes('css'))
+const renameJs = !!(args.isProduct && args.minimize.includes('js'))
 
 function markdown() {
   if (!extensions.includes(args.layoutExt)) {
     wrongConfigParam('layout_ext')
   }
-  // console.log('path: ', `${source.markdown}/*.${args.layoutExt}`);
+
   return src(`${source.markdown}/*.${args.layoutExt}`)
     .pipe(
       gulpIf(
@@ -41,6 +41,7 @@ function markdown() {
           STYLE_MIN: renameCss,
           JS_MIN: renameJs,
           IS_PRODUCTION: args.isProduct,
+          DEBUG: args.isDebug
         },
       })
     )

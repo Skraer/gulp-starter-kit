@@ -23,19 +23,18 @@ const args = {
   sourceMaps: false,
   layoutExt: normalArg(config.layout_ext) || 'html',
   stylesExt: normalArg(config.styles_ext) || 'css',
-  // stylesType: 'css',
   isDevelop: env.NODE_ENV === 'development',
   isProduct: env.NODE_ENV === 'production',
   minimize: arrFromField(config.minimize).map(str => str === 'javascript' ? 'js' : str),
   downgrade: false,
   imgExts: imageExtensions,
-  // exportLibs: arrFromField(config.export_libs),
-  init: false
+  init: false,
+  isDebug: false
 }
 
-// if (args.stylesExt === 'scss' || args.stylesExt === 'sass') {
-//   args.stylesType = 'sass'
-// }
+if (rawArgs.includes('debug')) {
+  args.isDebug = true
+}
 
 if (rawArgs.includes('-sm')) {
   args.sourceMaps = true
