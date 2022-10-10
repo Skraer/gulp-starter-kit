@@ -58,7 +58,7 @@ function stylesInit(browserSyncInstance) {
       stream = stream.pipe(styleHandler())
     }
 
-    stream
+    return stream
       .pipe(
         gulpIf(
           args.isProduct,
