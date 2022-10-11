@@ -14,8 +14,6 @@ const args = require('../args')
 const gcmq = require('gulp-group-css-media-queries')
 const { wrongConfigParam } = require('../utils')
 
-const filesDir = `${source.styles}/**/*.${args.stylesExt}`
-
 const compressCss = args.minimize.includes('css')
 
 const handlers = {
@@ -48,7 +46,7 @@ function stylesInit(browserSyncInstance) {
       ? null
       : handlers[args.stylesExt]
 
-    let stream = src(filesDir)
+    let stream = src(`${source.styles}/**/*.${args.stylesExt}`)
       .pipe(
         plumber({
           errorHandler: notifyHandler('Styles'),
@@ -60,7 +58,7 @@ function stylesInit(browserSyncInstance) {
       stream = stream.pipe(styleHandler())
     }
 
-    stream
+    return stream
       .pipe(
         gulpIf(
           args.isProduct,

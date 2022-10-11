@@ -13,8 +13,7 @@ const imagemin = require('gulp-imagemin')
 const { notifyHandler } = require('./plumbers')
 
 function images() {
-  const dir = `${source.images}/**/*.{${args.imgExts}}`
-  return src(dir)
+  return src(`${source.images}/**/*.{${args.imgExts}}`)
     .pipe(
       plumber({
         errorHandler: notifyHandler('Images'),
@@ -38,7 +37,7 @@ function images() {
           }),
         ],
         {
-          verbose: args.isProduct,
+          verbose: args.isProduct || args.isDebug,
         },
       )
     )

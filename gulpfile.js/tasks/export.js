@@ -17,5 +17,3 @@ function exportHandler(from, to) {
 
 exports.exportLibs = exportHandler(`${source.libs}/**/*.*`, `${output.libs}`)
 exports.exportOther = exportHandler(`${source.other}/**/*.*`, `${output.other}`)
-
-// module.exports = exportHandler

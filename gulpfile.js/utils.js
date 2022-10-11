@@ -1,6 +1,6 @@
-exports.normalArg = (param) => param?.toLowerCase().trim() || null
+const normalArg = (param) => param?.toLowerCase().trim() || null
 
-exports.wrongConfigParam = (param) => {
+const wrongConfigParam = (param) => {
   console.log(
     '\x1b[33m',
     'Wrong config parameter',
@@ -15,7 +15,7 @@ exports.wrongConfigParam = (param) => {
   throw new Error('Custom parameter error')
 }
 
-exports.wrongTask = (availableTasks) => {
+const wrongTask = (availableTasks) => {
   console.log(
     '\x1b[41m',
     'Expected one of these tasks:',
@@ -27,9 +27,9 @@ exports.wrongTask = (availableTasks) => {
   throw new Error('Wrong task name')
 }
 
-exports.reverseSlash = (path) => path.replace(/\\/g, '/')
+const reverseSlash = (path) => path.replace(/\\/g, '/')
 
-exports.arrFromField = (value) => {
+const arrFromField = (value) => {
   if (typeof value === 'string') {
     return [value]
   } else if (value instanceof Array) {
@@ -38,3 +38,9 @@ exports.arrFromField = (value) => {
     return []
   }
 }
+
+exports.normalArg = normalArg
+exports.wrongConfigParam = wrongConfigParam
+exports.wrongTask = wrongTask
+exports.reverseSlash = reverseSlash
+exports.arrFromField = arrFromField

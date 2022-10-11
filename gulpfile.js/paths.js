@@ -23,7 +23,7 @@ const output = {
   },
   html: path.join(outputDir),
   images: path.join(outputDir, 'img'),
-  css: path.join(outputDir, 'css'),
+  css: path.join(outputDir, 'styles'),
   js: path.join(outputDir, 'js'),
   libs: path.join(outputDir, 'libs'),
   fonts: path.join(outputDir, 'fonts'),

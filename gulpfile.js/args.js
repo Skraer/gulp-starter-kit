@@ -4,12 +4,14 @@ require('dotenv').config()
 const { env } = require('process')
 const path = require('path')
 
-let config;
+const defaultConfig = require('./defaultConfig')
+let externalConfig;
 try {
-  config = require(path.join(process.cwd(), 'gulp.config.json'))
+  externalConfig = require(path.join(process.cwd(), 'gulp.config.json'))
 } catch (e) {
-  config = require('./defaultConfig')
+  externalConfig = {}
 }
+const config = { ...defaultConfig, ...externalConfig }
 
 process.env.NODE_ENV = rawArgs.includes('build') ? 'production' : 'development'
 
@@ -21,21 +23,20 @@ const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg']
 const args = {
   mode: env.NODE_ENV || 'development',
   sourceMaps: false,
-  layoutExt: normalArg(config.layout_ext) || 'html',
-  stylesExt: normalArg(config.styles_ext) || 'css',
-  // stylesType: 'css',
+  layoutExt: normalArg(config.layout_ext),
+  stylesExt: normalArg(config.styles_ext),
   isDevelop: env.NODE_ENV === 'development',
   isProduct: env.NODE_ENV === 'production',
   minimize: arrFromField(config.minimize).map(str => str === 'javascript' ? 'js' : str),
   downgrade: false,
   imgExts: imageExtensions,
-  // exportLibs: arrFromField(config.export_libs),
-  init: false
+  init: false,
+  isDebug: false
 }
 
-// if (args.stylesExt === 'scss' || args.stylesExt === 'sass') {
-//   args.stylesType = 'sass'
-// }
+if (rawArgs.includes('debug')) {
+  args.isDebug = true
+}
 
 if (rawArgs.includes('-sm')) {
   args.sourceMaps = true
