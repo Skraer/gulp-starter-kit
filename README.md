@@ -28,7 +28,9 @@ npm install --save-dev skraer-starter-kit
   "ignore_images": [],
   "layout_ext": "html",
   "styles_ext": "css",
-  "minimize": []
+  "minimize": [],
+  "other_fonts": false,
+  "port": 3000
 }
 ```
 А это пример пользовательской настройки
@@ -37,9 +39,12 @@ npm install --save-dev skraer-starter-kit
   "ignore_images": ["svg", "gif"],
   "layout_ext": "pug",
   "styles_ext": "stylus",
-  "minimize": ["js", "css"]
+  "minimize": ["js", "css"],
+  "other_fonts": true,
+  "port": 5000
 }
 ```
+*Не обязательно указывать все поля в конфигу - достаточно тех, которые вы хотите изменить.*
 
 **ignore_images**  
 По умолчанию все картинки подвергаются сжатию и оптимизации. Вы можете указать расширения, которые будут игнорироваться оптимизаторами.  
@@ -59,6 +64,15 @@ npm install --save-dev skraer-starter-kit
 **minimize**  
 Массив значений, указывает какие файлы нужно минифицировать (минификация происходит только во время задачи **build**).  
 Возможные значения: **html** (пока что работает только если в layout_ext включен pug), **javascript** или **js**, **css**.
+
+**other_fonts**  
+Булево значение, определяющее, будут ли перенесены остальные исходные шрифты в конечную директорию.  
+По умолчанию с флагом **false** поведение следующее: если в папке src/fonts есть файлы ttf, то сборщик конвертирует их в woff и woff2 и переносит в dist/fonts. Если же **woff и woff2** уже есть в исходной папке, то они просто будут перенесены.  
+Если установить значение **true**, то все остальные шрифты будут также перенесены.
+
+**port**  
+Порт, на котором будет запущен сервер разработки.  
+По умолчанию 3000
 
 ---
 
@@ -84,10 +98,10 @@ src
 └───styles
 ```
 - в папку **fonts** можно добавлять шрифты с разрешением ttf - сборщик переформатирует
-- в папку **libs** кладите библиотеки, которые вам нужны - по итогу они будут просто экспортированы
+- в папку **libs** разместите библиотеки, которые вам нужны - по итогу они будут просто экспортированы
 - в папке **other** можете держать дополнительные файлы, например, какие-то файлы для скачивания в конечном проекте  
 
-Файлы с разметкой должны располагаться в папке src.
+Файлы с разметкой должны располагаться в папке src на верхнем уровне.
 
 Аналогичная структура будет создана в папке dist.
 
@@ -96,24 +110,24 @@ src
 ## Пакеты, задействованные в сборщике  
 | Название пакета | Срабатывает в dev среде | Срабатывает в prod среде | Вспомогательный |
 | --- | --- | --- | --- |
-| [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer) | ✖ | ✔ |   |
-| [gulp-babel](https://www.npmjs.com/package/gulp-babel) | ✖ | ✔ |  |
-| [gulp-clean-css](https://www.npmjs.com/package/gulp-clean-css) | ✖ | ✔ ||
+| [gulp-autoprefixer](https://www.npmjs.com/package/gulp-autoprefixer) |  | ✔ |   |
+| [gulp-babel](https://www.npmjs.com/package/gulp-babel) |  | ✔ |  |
+| [gulp-clean-css](https://www.npmjs.com/package/gulp-clean-css) |  | ✔ ||
 | [gulp-file-include](https://www.npmjs.com/package/gulp-file-include) | ✔ | ✔ |  |
-| [gulp-group-css-media-queries](https://www.npmjs.com/package/gulp-group-css-media-queries) | ✖ | ✔ |  |
+| [gulp-group-css-media-queries](https://www.npmjs.com/package/gulp-group-css-media-queries) |  | ✔ |  |
 | [gulp-imagemin](https://www.npmjs.com/package/gulp-imagemin) | ✔ | ✔ ||
 | [gulp-less](https://www.npmjs.com/package/gulp-less) | ✔ | ✔ ||
 | [gulp-notify](https://www.npmjs.com/package/gulp-notify) | ✔ | ✔ | ✔ |
 | [gulp-plumber](https://www.npmjs.com/package/gulp-plumber) | ✔ | ✔ | ✔ |
 | [gulp-preprocess](https://www.npmjs.com/package/gulp-preprocess) | ✔ | ✔ |  |
 | [gulp-pug](https://www.npmjs.com/package/gulp-pug) | ✔ | ✔ |  |
-| [gulp-rename](https://www.npmjs.com/package/gulp-rename) | ✖ | ✔ ||
+| [gulp-rename](https://www.npmjs.com/package/gulp-rename) |  | ✔ ||
 | [gulp-sass](https://www.npmjs.com/package/gulp-sass) | ✔ | ✔ ||
-| [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps) | ✖ | ✔ ||
+| [gulp-sourcemaps](https://www.npmjs.com/package/gulp-sourcemaps) |  | ✔ ||
 | [gulp-stylus](https://www.npmjs.com/package/gulp-stylus) | ✔ | ✔ ||
 | [gulp-ttf2woff](https://www.npmjs.com/package/gulp-ttf2woff) | ✔ | ✔ ||
 | [gulp-ttf2woff2](https://www.npmjs.com/package/gulp-ttf2woff2) | ✔ | ✔ ||
-| [gulp-uglify-es](https://www.npmjs.com/package/gulp-uglify-es) | ✖ | ✔ ||
+| [gulp-uglify-es](https://www.npmjs.com/package/gulp-uglify-es) |  | ✔ ||
 
 ### Дополнительно
 [**gulp-file-include**](https://www.npmjs.com/package/gulp-file-include)  
