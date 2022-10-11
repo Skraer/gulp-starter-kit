@@ -8,6 +8,7 @@
     "last 10 versions",
     "> 0.1%"
   ],
+  "homepage": "https://github.com/Skraer/gulp-starter-kit",
   "author": "",
   "license": "ISC",
   "dependencies": {
