@@ -24,7 +24,7 @@ function markdown() {
       gulpIf(
         args.layoutExt === 'pug',
         pug({
-          pretty: minimizeHtml,
+          pretty: !minimizeHtml,
         })
       )
     )
