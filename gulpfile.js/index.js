@@ -17,11 +17,8 @@ const clean = require('./tasks/clean')
 const defaultTask = require('./tasks/defaultTask')
 
 function watchTask() {
-  const layoutExt = args.layoutExt
-  const stylesExt = args.stylesExt
-
-  watch(rs(`${source.markdown}/**/*.${layoutExt}`), series(markdown))
-  watch(rs(`${source.styles}/**/*.${stylesExt}`), series(styles))
+  watch(rs(`${source.markdown}/**/*.${args.layoutExt}`), series(markdown))
+  watch(rs(`${source.styles}/**/*.${args.stylesExt}`), series(styles))
   watch(rs(`${source.js}/**/*.js`), series(javascript))
   watch(rs(`${source.images}/**/*.${args.imgExts}`), series(images))
 }

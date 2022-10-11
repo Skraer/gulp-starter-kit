@@ -1,5 +1,5 @@
-// const browserSync = require('browser-sync')
 const { output } = require('../paths')
+const args = require('../args')
 
 module.exports = function syncInit(browserSyncInstance) {
   return function sync() {
@@ -13,7 +13,7 @@ module.exports = function syncInit(browserSyncInstance) {
         scroll: false,
         location: false,
       },
-      port: 3000,
+      port: args.port || 3000,
     })
     browserSyncInstance
       .watch(`${output}/**/*.*`)

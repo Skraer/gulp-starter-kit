@@ -31,7 +31,9 @@ const args = {
   downgrade: false,
   imgExts: imageExtensions,
   init: false,
-  isDebug: false
+  isDebug: false,
+  cloneFonts: config.other_fonts,
+  port: config.port
 }
 
 if (rawArgs.includes('debug')) {
