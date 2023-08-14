@@ -32,9 +32,9 @@ function images() {
           optipng({
             optimizationLevel: 5,
           }),
-          svgo({
-            plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
-          }),
+          // svgo({
+          //   plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
+          // }),
         ],
         {
           verbose: args.isProduct || args.isDebug,
