@@ -1,0 +1,45 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Config",
+  "description": "Config for skraer-starter-kit",
+  "type": "object",
+  "properties": {
+    "ignore_images": {
+      "description": "Image extensions for ignoring optimize",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["svg", "png", "jpg", "jpeg", "gif"]
+      },
+      "uniqueItems": true
+    },
+    "layout_ext": {
+      "description": "Extension for layout",
+      "type": "string",
+      "enum": ["html", "pug"]
+    },
+    "styles_ext": {
+      "description": "Extension for styles",
+      "type": "string",
+      "enum": ["css", "scss", "sass", "less", "stylus"]
+    },
+    "minimize": {
+      "description": "Extensions for minimizing",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["html", "css", "javascript", "js"]
+      },
+      "uniqueItems": true
+    },
+    "port": {
+      "description": "Port for development server",
+      "type": "number"
+    },
+    "other_fonts": {
+      "description": "Will move other fonts except woff and woff2",
+      "type": "boolean"
+    }
+  }
+}

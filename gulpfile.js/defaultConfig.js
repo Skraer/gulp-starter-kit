@@ -4,7 +4,7 @@ const defaultConfig = {
   styles_ext: 'css',
   minimize: [],
   other_fonts: false,
-  port: 3000
+  port: 3000,
 }
 
 module.exports = defaultConfig
