@@ -49,6 +49,7 @@
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^9.0.0",
-    "sass": "^1.38.2"
+    "sass": "^1.38.2",
+    "svgo": "^2.8.0"
   }
 }
