@@ -1,0 +1,47 @@
+*,*::before,*::after {box-sizing: border-box;}
+ul,ol {padding: 0;}
+body,h1,h2,h3,h4,p,ul,ol,li,figure,figcaption,blockquote,dl,dd {margin: 0;}
+body {min-height: 100vh;scroll-behavior: smooth;text-rendering: optimizeSpeed;line-height: normal;}
+ul,ol {list-style: none;}
+a {text-decoration: inherit;color: inherit;}
+a:not([class]) {text-decoration-skip-ink: auto;}
+img {max-width: 100%;display: block;}
+input,button,textarea,select {font: inherit;}
+@media (prefers-reduced-motion: reduce) {* {animation-duration: 0.01ms !important;animation-iteration-count: 1 !important;transition-duration: 0.01ms !important;scroll-behavior: auto !important;}}
+
+:root {
+  --ff-main: Arial, Helvetica, sans-serif;
+
+  --width-container: 1200px;
+  --padding-container: 30px;
+
+  --time-s: .15s;
+  --time-m: .25s;
+  --time-l: .35s;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: var(--ff-main);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+body.lock {
+  overflow-y: hidden;
+}
+
+.container {
+  max-width: var(--width-container);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--padding-container);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+}

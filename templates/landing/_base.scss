@@ -1,0 +1,25 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: var(--ff-main);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+body.lock {
+  overflow-y: hidden;
+}
+
+.container {
+  max-width: var(--width-container);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--padding-container);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+}

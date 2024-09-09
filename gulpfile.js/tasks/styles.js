@@ -31,7 +31,7 @@ const handlers = {
   },
   stylus() {
     return stylus()
-  }
+  },
 }
 
 function stylesInit(browserSyncInstance) {
@@ -42,9 +42,7 @@ function stylesInit(browserSyncInstance) {
       wrongConfigParam('styles_ext')
     }
 
-    const styleHandler = args.stylesExt === 'css'
-      ? null
-      : handlers[args.stylesExt]
+    const styleHandler = args.stylesExt === 'css' ? null : handlers[args.stylesExt]
 
     let stream = src(`${source.styles}/**/*.${args.stylesExt}`)
       .pipe(

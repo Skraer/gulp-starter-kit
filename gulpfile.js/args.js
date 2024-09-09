@@ -5,7 +5,7 @@ const { env } = require('process')
 const path = require('path')
 
 const defaultConfig = require('./defaultConfig')
-let externalConfig;
+let externalConfig
 try {
   externalConfig = require(path.join(process.cwd(), 'gulp.config.json'))
 } catch (e) {
@@ -27,13 +27,15 @@ const args = {
   stylesExt: normalArg(config.styles_ext),
   isDevelop: env.NODE_ENV === 'development',
   isProduct: env.NODE_ENV === 'production',
-  minimize: arrFromField(config.minimize).map(str => str === 'javascript' ? 'js' : str),
+  minimize: arrFromField(config.minimize).map((str) => (str === 'javascript' ? 'js' : str)),
   downgrade: false,
   imgExts: imageExtensions,
   init: false,
   isDebug: false,
   cloneFonts: config.other_fonts,
-  port: config.port
+  port: config.port,
+  tpl: false,
+  templates: [],
 }
 
 if (rawArgs.includes('debug')) {
@@ -50,6 +52,17 @@ if (rawArgs.includes('-dg')) {
 
 if (rawArgs.includes('init')) {
   args.init = true
+}
+
+if (rawArgs.some((t) => t.includes('tpl'))) {
+  const arg = rawArgs.find((a) => a.indexOf('tpl') === 0)
+  const templates = arg.split(':').slice(1)
+  const allowTpls = ['scss', 'css', 'js', 'html']
+  templates.forEach((t) => {
+    if (allowTpls.includes(t)) args.templates.push(t)
+  })
+
+  args.tpl = true
 }
 
 module.exports = args
