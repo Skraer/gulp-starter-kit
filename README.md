@@ -80,7 +80,10 @@ npm install --save-dev skraer-starter-kit
 Добавьте в ваш package.json в поле scripts следующие скрипты:
 - **skraer-starter-kit build** для конечной сборки проекта в режиме production
 - **skraer-starter-kit init** для инициализации структуры проекта и создания конфига по умолчанию
-- **skraer-starter-kit** без одного из верхних аргументов - запускает сборку в development режиме
+- **skraer-starter-kit** без одного из верхних аргументов - запускает сборку в development режиме  
+
+А также, вы можете инициировать базовые шаблоны с помощью команды **skraer-starter-kit tpl**, указав через двоеточие нужные файлы. Пример команды с полным перечнем доступных файлов: **skraer-starter-kit tpl:html:js:css:scss**  
+
 ### Также доступны флаги:
 - Флаг **-dg** сообщает, что нужно применить *babel* для скриптов
 - Флаг **-sm** включает *source maps*
